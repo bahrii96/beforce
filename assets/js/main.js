@@ -2,10 +2,6 @@
     $(document).ready(function () {
         // When the user scrolls the page, execute myFunction
 
-        $('.grid-image').fancybox({
-            buttons: ['zoom', 'slideShow', 'fullScreen', 'thumbs', 'close'],
-            loop: true,
-        });
         window.onscroll = function () {
             myFunction();
         };
@@ -22,83 +18,17 @@
         $('#accordion').accordion({
             header: '> div > h3',
             heightStyle: 'content',
+            collapsible: true,
         });
 
-        $('.services-block__item:has(.ui-state-active)').addClass('active');
+        // $(document).on('touchstart', function (e) {
+        //     if (!$(e.target).closest('nav').length && !$(e.target).hasClass('menu-toggle')) {
+        //         $('.header .menu-toggle, .header nav').removeClass('is-active');
+        //         $('body').removeClass('is-active');
+        //     }
+        // });
 
-        $('.services-block__item').on('click', function () {
-            // Видаляємо клас 'active' у всіх елементів
-            $('.services-block__item').removeClass('active');
-
-            if ($(this).find('.ui-state-active').length) {
-                $(this).addClass('active');
-            }
-        });
-
-        var swiper = new Swiper('.testimonials-block__swiper', {
-            slidesPerView: 1.2,
-            spaceBetween: 8,
-
-            breakpoints: {
-                767: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                },
-            },
-            navigation: {
-                nextEl: '.swiper-next',
-                prevEl: '.swiper-prev',
-            },
-            autoplay: {
-                delay: 5000,
-            },
-            loop: true,
-            speed: 1000,
-        });
-
-        var swiper = new Swiper('.products-block__swiper ', {
-            slidesPerView: 1.4,
-            spaceBetween: 8,
-
-            breakpoints: {
-                767: {
-                    slidesPerView: 4.1,
-                    spaceBetween: 20,
-                },
-            },
-
-            autoplay: {
-                delay: 5000,
-            },
-            loop: true,
-            speed: 1000,
-        });
-        var swiper = new Swiper('.gallery-block__swiper', {
-            slidesPerView: 1.4,
-            spaceBetween: 8,
-
-            breakpoints: {
-                767: {
-                    slidesPerView: 4,
-                    spaceBetween: 20,
-                },
-            },
-
-            autoplay: {
-                delay: 5000,
-            },
-            loop: true,
-            speed: 1000,
-        });
-
-        $(document).on('touchstart', function (e) {
-            if (!$(e.target).closest('nav').length && !$(e.target).hasClass('menu-toggle')) {
-                $('.header .menu-toggle, .header nav').removeClass('is-active');
-                $('body').removeClass('is-active');
-            }
-        });
-
-        $('.header .menu-toggle, .header nav .close').click(function (e) {
+        $('.header .menu-toggle, .header nav ').click(function (e) {
             $('.header .menu-toggle, .header nav').toggleClass('is-active');
             $('body').toggleClass('is-active');
         });
@@ -118,42 +48,78 @@
             $('body').toggleClass('is-active');
         });
 
-        $('.header .side-bar-toggle').click(function (e) {
-            $('body').addClass('fixed');
-            $('body .side-bar').addClass('show');
+			 var swiper = new Swiper('.collection-block__swiper', {
+                 slidesPerView: 1.3,
+                 spaceBetween: 8,
+
+                 breakpoints: {
+                     767: {
+                         slidesPerView: 4,
+                         spaceBetween: 16,
+                     },
+                     1300: {
+                         slidesPerView: 5,
+                         spaceBetween: 16,
+                     },
+                 },
+                 speed: 1000,
+                //  autoplay: {
+                //      delay: 3000,
+                //  },
+                 loop: true,
+             });
+
+			
+        var swiper = new Swiper('.product-block__swiper', {
+            slidesPerView: 1.3,
+            spaceBetween: 8,
+
+            breakpoints: {
+                767: {
+                    slidesPerView: 2.6,
+                    spaceBetween: 16,
+                },
+                1300: {
+                    slidesPerView: 3.6,
+                    spaceBetween: 16,
+                },
+            },
+            speed: 1000,
+            autoplay: {
+                delay: 1500,
+            },
+            loop: true,
         });
 
-        $('body .side-bar .close-sidebar').click(function (e) {
-            $('body').removeClass('fixed');
-            $('body .side-bar').removeClass('show');
+        var swiper = new Swiper('.mySwiper2', {
+            slidesPerView: 1,
+            spaceBetween: 32,
+
+            navigation: {
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev',
+            },
+            speed: 2000,
+            autoplay: {
+                delay: 5000,
+            },
+            loop: true,
         });
 
-        var nav = document.querySelector('nav');
+        $('[data-fancybox]').fancybox({
+            loop: false, // Вимкнути циклічне перемикання
+            touch: false,
+        });
     });
 })(jQuery);
-
 
 document.addEventListener(
     'wpcf7mailsent',
     function (event) {
-        var fancyboxInstance = $.fancybox.getInstance();
-
-        if (fancyboxInstance) {
-            fancyboxInstance.close(); // Закриваємо відкритий попап
-            $.fancybox.open({
-                src: '#popup-answer',
-                type: 'inline',
-                opts: {
-                    afterClose: function () {},
-                },
-            });
-        } else {
-            window.location.href = '/success';
-        }
+        window.location.href = '/success'; // URL сторінки, на яку хочете зробити редирект
     },
     false,
 );
-
 
 
 

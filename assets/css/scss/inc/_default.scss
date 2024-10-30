@@ -5,15 +5,6 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    min-width: 320px;
-    position: relative;
-    font-size: 16px;
-}
-
 article,
 aside,
 details,
@@ -50,19 +41,6 @@ template {
     display: none;
 }
 
-a {
-    text-decoration: none;
-    background: transparent;
-
-    &:active,
-    &:hover {
-        outline: 0;
-    }
-
-    img {
-        border: 0;
-    }
-}
 
 b,
 strong {
@@ -94,7 +72,6 @@ svg:not(:root) {
 }
 
 button,
-// input,
 optgroup,
 select,
 textarea {
@@ -191,10 +168,12 @@ img {
 ul,
 li {
     margin: 0;
+		
     padding: 0;
     text-decoration: none;
 }
-
-.clearfix {
-    clear: both;
+ul ,
+ol{
+	margin-left: 20px;
+	margin-bottom: 12px;
 }

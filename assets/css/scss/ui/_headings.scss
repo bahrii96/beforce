@@ -1,17 +1,43 @@
+a {
+    text-decoration: none;
+    background: transparent;
+    font-size: $font_paragraph;
+    &:active,
+    &:hover {
+        outline: 0;
+        opacity: 0.8;
+    }
+}
 
+p {
+    margin-bottom: rem(12);
+}
+
+h1 {
+    font-size: clamp(rem(48), vw(140), rem(140));
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: rem(16);
+}
 
 h2 {
-font-family: 'e-Ukraine Head';
-font-size: clamp(rem(24), vw(40), rem(40));
-font-weight: 400;
-text-transform: uppercase;
-margin-bottom: rem(8);
-}
-desc{
-font-family: 'e-Ukraine Head';
-font-size: clamp(rem(12), vw(16), rem(16));
-font-weight: 200;
-
+    font-size: clamp(rem(32), vw(80), rem(80));
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: clamp(rem(16), vw(32), rem(32));
+    color: #4f4239;
+    line-height: 1.1;
 }
 
+h3 {
+    margin-bottom: rem(8);
+    font-weight: 400;
+    font-size: $p_h3;
+}
+
+h4 {
+    margin-bottom: rem(12);
+    font-weight: 400;
+    font-size: $p_h4;
+}
 

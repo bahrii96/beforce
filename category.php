@@ -1,49 +1,48 @@
-<?php
-get_header();
-?>
+<?php get_header(); ?>
+<div class="container">
+	<h1><?php single_cat_title(); ?></h1>
+	<div class="post-grid">
+		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+				<div class="post-item">
+					<?php if (has_post_thumbnail()) : ?>
+						<div class="post-thumbnail">
+							<a href="<?php the_permalink(); ?>">
+								<?php the_post_thumbnail('medium'); ?>
+							</a>
+						</div>
+					<?php endif; ?>
+					<div class="post-content">
+						<h2 class="post-title">
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</h2>
+						<div class="post-excerpt">
+							<?php
+							// Retrieve meta description
+							$meta_description = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
+							// Display excerpt or meta description if available
+							if (!empty($meta_description)) {
+								echo wp_trim_words($meta_description, 10, '...');
+							} else {
+								echo wp_trim_words(get_the_excerpt(), 10, '...');
+							}
+							?>
+						</div>
+						<a href="<?php the_permalink(); ?>" class="button main-item__button"><span><?php echo __('Read More', 'paripesa'); ?></span></a>
 
-<?php
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$category = get_queried_object();
-
-$postsCategories = new WP_Query(array(
-  'post_type' => 'post',
-  'posts_per_page' => 5,
-  'post_status' => 'publish',
-  'category__in' => array($category->term_id),
-  'paged' => $paged,
-));
-?>
-
-<section class="hero-services">
-  <div class="container">
-    <div class="hero-services__content">
-
-    </div>
-  </div>
-</section>
-<section class="entry-page blog-index-page">
-  <div class="container">
-    <h1><?php echo $category->name; ?></h1>
-    <div class="blog-index-page__wrapper">
-      <?php {
-        if ($postsCategories->have_posts()) {
-          while ($postsCategories->have_posts()) : $postsCategories->the_post(); ?>
-            <?php get_template_part('post-templates/post-item-meta', get_post_format()); ?>
-      <?php endwhile;
-          wp_reset_query();
-          wp_reset_postdata();
-        } else {
-          echo ('<p>Posts is empty.</p>');
-          wp_reset_query();
-          wp_reset_postdata();
-        }
-      }
-      ?>
-      <div class="blog-index-page__pagination">
-        <?php pagination_bar($postsCategories); ?>
-      </div>
-    </div>
-  </div>
-</section>
+					</div>
+				</div>
+			<?php endwhile;
+		else : ?>
+			<p><?php esc_html_e('No posts found in this category.', 'textdomain'); ?></p>
+		<?php endif; ?>
+	</div>
+	<div class="pagination">
+		<?php
+		the_posts_pagination(array(
+			'prev_text' => esc_html__('Previous', 'textdomain'),
+			'next_text' => esc_html__('Next', 'textdomain'),
+		));
+		?>
+	</div>
+</div>
 <?php get_footer(); ?>

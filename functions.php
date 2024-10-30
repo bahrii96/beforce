@@ -25,12 +25,8 @@ if (!defined('ABSPATH')) {
 register_nav_menus(array(
 	'primary_left' => __('Primary Menu'),
 ));
-register_nav_menus(array(
-	'primary_footer' => __('Primary Footer First'),
-));
-register_nav_menus(array(
-	'primary_footer_second' => __('Primary Footer Second'),
-));
+
+add_theme_support('woocommerce');
 
 
 add_theme_support('post-thumbnails');
@@ -55,69 +51,43 @@ include 'inc/assets.php';
 include 'inc/disable-emojis.php';
 include 'inc/features.php';
 
+
 require_once get_stylesheet_directory() . '/inc/navigation.php';
-
-
-function toolset_fix_custom_posts_per_page($query_string)
-{
-	if (is_admin() || !is_array($query_string))
-		return $query_string;
-	$post_per_page = get_option('posts_per_page');
-	$post_types_to_fix = array(
-		array(
-			'post_type' => 'testimonial',
-			'posts_per_page' => 30
-		),
-		// add another if you want
-		/*
-      array(
-          'post_type' => 'movie',
-          'posts_per_page' => 2
-      ),
-      */
-	);
-
-	foreach ($post_types_to_fix as $fix) {
-		if (
-			array_key_exists('post_type', $query_string)
-			&& $query_string['post_type'] == $fix['post_type']
-		) {
-			$query_string['posts_per_page'] = $fix['posts_per_page'];
-			return $query_string;
-		}
-	}
-
-	return $query_string;
-}
-
-add_filter('request', 'toolset_fix_custom_posts_per_page');
 
 function add_paragraph_tags_to_acf_wysiwyg_content($value, $post_id, $field)
 {
 	if ($field['type'] === 'wysiwyg') {
-		$blocks = preg_split('/\n\s*\n/', $value);
-		$blocks = array_filter($blocks);
-		$formatted_content = '';
-		foreach ($blocks as $block) {
-			if (!preg_match('/^<p>/', $block)) {
-				$formatted_content .= '<p>' . $block . '</p>';
-			} else {
-				$formatted_content .= $block;
-			}
-		}
+		$formatted_content = wpautop($value);
 		return $formatted_content;
 	}
 
 	return $value;
 }
+
 add_filter('acf/format_value', 'add_paragraph_tags_to_acf_wysiwyg_content', 10, 3);
 
 
-function year_shortcode()
+add_action('init', 'remove_shortlink');
+
+function remove_shortlink()
 {
-	$year = date_i18n('Y');
-	return $year;
+	remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+};
+
+$LastModified_unix = 1294844676; // время последнего изменения страницы
+$LastModified = gmdate("D, d M Y H:i:s \G\M\T", $LastModified_unix);
+$IfModifiedSince = false;
+if (isset($_ENV['HTTP_IF_MODIFIED_SINCE']))
+	$IfModifiedSince = strtotime(substr($_ENV['HTTP_IF_MODIFIED_SINCE'], 5));
+if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']))
+	$IfModifiedSince = strtotime(substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 5));
+if ($IfModifiedSince && $IfModifiedSince >= $LastModified_unix) {
+	header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+	exit;
 }
-add_shortcode('year', 'year_shortcode');
-
-
+header('Last-Modified: ' . $LastModified);
+add_filter( 'wpseo_opengraph_title', 'remove_yoast_meta_description' );
+add_filter( 'wpseo_opengraph_desc', 'remove_yoast_meta_description' );
+function remove_yoast_meta_description( $myfilter ) {
+        return false;
+   }

@@ -3,7 +3,8 @@
 
 $blue: #2fa9e1;
 $white: rgb(255, 255, 255);
-$green: #135464;
+$green: #0c6107;
+$yellow: #ffce6d;
 $main: #212121;
 
 @function rem($value) {
@@ -12,15 +13,14 @@ $main: #212121;
 }
 
 $bodyfontsize: rem(16);
-$maxContainerWidth: rem(1680);
+$maxContainerWidth: rem(1870);
 
-$awasomeFont: 'Font Awesome 5 Pro';
+$awesomeFont: 'Font Awesome 5 Pro';
 $fontIcons: 'ETmodules'; // for soc icons
 
 $padding-middle: 24px;
 
 // <Mixins-media-queries>=========================================================================================================
-
 
 @mixin desktop-mdll {
     @media (max-width: 1600) {
@@ -28,7 +28,7 @@ $padding-middle: 24px;
     }
 }
 @mixin desktop-md {
-    @media (max-width: 1480px) {
+    @media (max-width: 1380px) {
         @content;
     }
 }
@@ -64,7 +64,7 @@ $padding-middle: 24px;
 }
 // Mixins
 
-$maxWidth: 1440;
+$maxWidth: 1870;
 $mobWidth: 320;
 
 @function vw($value) {
@@ -119,9 +119,10 @@ $mobWidth: 320;
     }
 }
 
-$font_paragraph: clamp(rem(14), vw(14), rem(14));
-$p_h1: clamp(rem(32), vw(40), rem(40));
+$font_paragraph: clamp(rem(13), vw(15), rem(15));
+$p_h1: clamp(rem(24), vw(40), rem(40));
 $p_h2: clamp(rem(20), vw(26), rem(26));
 $p_h3: clamp(rem(18), vw(24), rem(24));
 $p_h4: clamp(rem(16), vw(22), rem(22));
 $p_h5: clamp(rem(16), vw(18), rem(18));
+

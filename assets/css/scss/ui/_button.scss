@@ -1,35 +1,19 @@
-.btn-bl {
-    display: inline-flex;
-    background: rgb(9, 7, 0);
-    color: rgb(217, 217, 217);
-    font-family: 'e-Ukraine Head';
-    font-size: clamp(rem(12), vw(16), rem(16));
-    font-weight: 400;
-    text-transform: uppercase;
-    padding: rem(16) rem(48);
-    transition: all 0.3s;
-    border: 2px solid rgb(9, 7, 0);
-    border-radius: 0;
-    &:hover {
-        color: rgb(9, 7, 0);
-        background: transparent;
-    }
-}
 .btn {
     display: inline-flex;
-    background: rgb(196, 156, 77);
-    color: rgb(217, 217, 217);
-    font-family: 'e-Ukraine Head';
-    font-size: clamp(rem(12), vw(16), rem(16));
+    color: white;
     font-weight: 400;
+    font-size: clamp(rem(16), vw(18), rem(18));
     text-transform: uppercase;
-    padding: rem(16) rem(48);
-    transition: all 0.3s;
-    border: 2px solid rgb(196, 156, 77);
-    border-radius: 0;
+    padding: rem(18) rem(36);
+    transition: all 0.3s ease 0s;
+    background: #4f4239;
+    outline: none;
+    border: none;
+		 font-family: 'Geometria'!important;
+    border-radius: 0 !important;
     &:hover {
-        color: rgb(196, 156, 77);
-        background: transparent;
+        background: #1d1d1b;
+        color: #d9cebb;
     }
 }
 

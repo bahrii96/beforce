@@ -4,11 +4,9 @@
     margin: 0 auto;
     padding: 0 rem(15);
 
-    @include desktop-md {
-        padding: 0 rem(60);
-    }
     @include tablet-md {
         padding: 0 rem(15);
     }
 }
+
 
